@@ -1,26 +1,209 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --animate-scroll: scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  @keyframes scroll {
+    to {
+      transform: translate(calc(-50% - 0.5rem));
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+:root {
+  --radius: 0.625rem;
+  /* Subtle red/white theme */
+  --background: white;
+  --foreground: oklch(0.24 0.02 25);
+  --card: white;
+  --card-foreground: oklch(0.24 0.02 25);
+  --popover: white;
+  --popover-foreground: oklch(0.24 0.02 25);
+  /* Tailwind red-500 in oklch approx */
+  --primary: oklch(0.62 0.25 25); /* ~red-500 */
+  --primary-foreground: white;
+  --secondary: oklch(0.98 0 0); /* subtle gray/white */
+  --secondary-foreground: oklch(0.28 0.02 25);
+  --muted: oklch(0.98 0 0);
+  --muted-foreground: oklch(0.48 0.02 25);
+  --accent: oklch(0.98 0 0);
+  --accent-foreground: oklch(0.28 0.02 25);
+  --destructive: oklch(0.62 0.25 25);
+  --border: oklch(0.94 0.01 255);
+  --input: oklch(0.96 0 0);
+  --ring: oklch(0.82 0.06 25);
+  /* charts & sidebar keep neutrals */
+  --chart-1: oklch(0.65 0.2 25);
+  --chart-2: oklch(0.6 0.12 184.7);
+  --chart-3: oklch(0.4 0.07 227.4);
+  --chart-4: oklch(0.83 0.19 84.4);
+  --chart-5: oklch(0.77 0.18 70.1);
+  --sidebar: white;
+  --sidebar-foreground: oklch(0.24 0.02 25);
+  --sidebar-primary: oklch(0.62 0.25 25);
+  --sidebar-primary-foreground: white;
+  --sidebar-accent: oklch(0.98 0 0);
+  --sidebar-accent-foreground: oklch(0.28 0.02 25);
+  --sidebar-border: oklch(0.94 0.01 255);
+  --sidebar-ring: oklch(0.82 0.06 25);
+}
+
+.dark {
+  --background: oklch(0.18 0.02 25);
+  --foreground: oklch(0.98 0.01 25);
+  --card: oklch(0.18 0.02 25);
+  --card-foreground: oklch(0.98 0.01 25);
+  --popover: oklch(0.18 0.02 25);
+  --popover-foreground: oklch(0.98 0.01 25);
+  --primary: oklch(0.62 0.25 25);
+  --primary-foreground: white;
+  --secondary: oklch(0.24 0.02 25);
+  --secondary-foreground: oklch(0.98 0.01 25);
+  --muted: oklch(0.24 0.02 25);
+  --muted-foreground: oklch(0.84 0.01 25);
+  --accent: oklch(0.24 0.02 25);
+  --accent-foreground: oklch(0.98 0.01 25);
+  --destructive: oklch(0.62 0.25 25);
+  --border: oklch(1 0 0 / 12%);
+  --input: oklch(1 0 0 / 16%);
+  --ring: oklch(0.62 0.1 25);
+  --chart-1: oklch(0.48 0.22 25);
+  --chart-2: oklch(0.68 0.17 162);
+  --chart-3: oklch(0.77 0.19 70);
+  --chart-4: oklch(0.63 0.26 304);
+  --chart-5: oklch(0.65 0.24 16);
+  --sidebar: oklch(0.18 0.02 25);
+  --sidebar-foreground: oklch(0.98 0.01 25);
+  --sidebar-primary: oklch(0.62 0.25 25);
+  --sidebar-primary-foreground: white;
+  --sidebar-accent: oklch(0.24 0.02 25);
+  --sidebar-accent-foreground: oklch(0.98 0.01 25);
+  --sidebar-border: oklch(1 0 0 / 12%);
+  --sidebar-ring: oklch(0.62 0.1 25);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@keyframes marquee-x {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+
+  /* shift by one copy width */
+}
+
+.marquee-x {
+  animation: marquee-x var(--marquee-duration, 30s) linear infinite;
+  will-change: transform;
+}
+
+.marquee-x:hover {
+  animation-play-state: paused;
+  /* nice UX: pause on hover */
+}
+
+@keyframes imc-left {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes imc-right {
+  from {
+    transform: translateX(-50%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+.imc-track {
+  animation-duration: var(--imc-duration, 28s);
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform;
+}
+
+.imc-left {
+  animation-name: imc-left;
+}
+
+.imc-right {
+  animation-name: imc-right;
+}
+
+.imc-pause:hover {
+  animation-play-state: paused;
+}
+
+.imc-mask {
+  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .imc-track {
+    animation: none;
+  }
+}
+
+@keyframes scroll {
+  to { transform: translateX(calc(-50%)); }
+}
+.animate-scroll {
+  animation: scroll var(--animation-duration, 40s) linear infinite;
+  animation-direction: var(--animation-direction, forwards);
+  will-change: transform;
 }
